@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Player {
     private String name;
@@ -8,15 +7,9 @@ public class Player {
     private Monster currentMonster;
 
 
-    Scanner scan = new Scanner(System.in);
-
     public Player(String name, List<Monster> monsterList) {
         this.name = name;
         this.monsterList = monsterList;
-    }
-
-    public Player(String name) {
-        this.name = name;
     }
 
     public String getName() {
@@ -71,12 +64,4 @@ public class Player {
         System.out.println("\n");
     }
 
-    public boolean isLose(){
-        return (monsterList.get(0).getStats().getHealthPoint() <=0 && 
-        monsterList.get(1).getStats().getHealthPoint() <=0 && 
-        monsterList.get(2).getStats().getHealthPoint() <=0 && 
-        monsterList.get(3).getStats().getHealthPoint() <=0 && 
-        monsterList.get(4).getStats().getHealthPoint() <=0 && 
-        monsterList.get(5).getStats().getHealthPoint() <=0);
-    }
 }

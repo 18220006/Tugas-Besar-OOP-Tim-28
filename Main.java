@@ -1,10 +1,5 @@
 import util.CSVReader;
 import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.*;
 
 public class Main {
@@ -183,15 +178,21 @@ public class Main {
         int inputMenu;
         Scanner scan = new Scanner(System.in);
 
+        System.out.println("\nSelamat datang di Monster Saku!\n");
+
         while (menu){
-            System.out.println("\nSelamat datang di Monster Saku!\n");
             System.out.println("[1] Start Game\n[2] Help\n[3] Exit\n");
 
             System.out.printf("> ");
             inputMenu = scan.nextInt();
 
             if (inputMenu == 2) {
-                System.out.println("HELP\n");
+                System.out.println("\nMonster Saku adalah permainan berbasis giliran atau turn based. Monster Saku");
+                System.out.println("\ndimainkan oleh 2 pemain. Setiap pemain akan mendapatkan 6 Monster untuk");
+                System.out.println("\nbertarung sesama pemain. Setiap Monster memiliki nama, atribut stats, moves");
+                System.out.println("\ndan tipe elemen tertentu.\n");
+                System.out.println("\nPemain akan membantu mengarahkan Monsternya untuk mengalahkan Monster pemain");
+                System.out.println("\nmusuh. Pemain yang kehabisan Monster akan dinyatakan kalah.\n");
             } else if (inputMenu == 3) {
                 menu = false;
                 System.out.println("\nTerima kasih telah bermain Monster Saku!\nSampai jumpa Player!");
