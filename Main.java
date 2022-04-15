@@ -263,34 +263,34 @@ public class Main {
 
                         // Check Monster Status Condition Burn
                         if (p1.getCurrentMonster().getStatusCondition() == StatusCondition.BURN) {
-                            System.out.printf("%s Terkena Efek Burn\n", p1.getCurrentMonster().getName());
+                            System.out.printf("%s terkena damage burn\n", p1.getCurrentMonster().getName());
                             double newHealth1 = (p1.getCurrentMonster().getStats().getHealthPoint())
                                     - Math.floor(p1.getCurrentMonster().getStats().getMaxHealth() * 1/8);
                             p1.getCurrentMonster().getStats().setHealthPoint(newHealth1);
                         }
-                        else if (p2.getCurrentMonster().getStatusCondition() == StatusCondition.BURN) {
-                            System.out.printf("%s Terkena Efek Burn\n", p2.getCurrentMonster().getName());
+                        if (p2.getCurrentMonster().getStatusCondition() == StatusCondition.BURN) {
+                            System.out.printf("%s terkena damage burn\n", p2.getCurrentMonster().getName());
                             double newHealth2 = (p2.getCurrentMonster().getStats().getHealthPoint())
                                     - Math.floor(p2.getCurrentMonster().getStats().getMaxHealth() * 1/8);
                             p2.getCurrentMonster().getStats().setHealthPoint(newHealth2);
                         }
 
                         // Check Monster Status Condition Poison
-                        else if (p1.getCurrentMonster().getStatusCondition() == StatusCondition.POISON) {
-                            System.out.printf("%s Terkena Efek Poison\n", p1.getCurrentMonster().getName());
+                        if (p1.getCurrentMonster().getStatusCondition() == StatusCondition.POISON) {
+                            System.out.printf("%s terkena damage poison\n", p1.getCurrentMonster().getName());
                             double newHealth1 = (p1.getCurrentMonster().getStats().getHealthPoint())
                                     - Math.floor(p1.getCurrentMonster().getStats().getMaxHealth() * 1/16);
                             p1.getCurrentMonster().getStats().setHealthPoint(newHealth1);
                         }
-                        else if (p2.getCurrentMonster().getStatusCondition() == StatusCondition.POISON) {
-                            System.out.printf("%s Terkena Efek Poison\n", p2.getCurrentMonster().getName());
+                        if (p2.getCurrentMonster().getStatusCondition() == StatusCondition.POISON) {
+                            System.out.printf("%s terkena damage poison\n", p2.getCurrentMonster().getName());
                             double newHealth2 = (p2.getCurrentMonster().getStats().getHealthPoint())
                                     - Math.floor(p2.getCurrentMonster().getStats().getMaxHealth() * 1/16);
                             p2.getCurrentMonster().getStats().setHealthPoint(newHealth2);
                         }
 
                         // Check Monster Status Condition Paralyze
-                        else if (p1.getCurrentMonster().getStatusCondition() == StatusCondition.PARALYZE) {
+                        if (p1.getCurrentMonster().getStatusCondition() == StatusCondition.PARALYZE) {
                             int chanceParalyze1 = random.nextInt(4);
                             if (chanceParalyze1 == 1) {
                                 p1.getCurrentMonster().setIsMoveable(false);
@@ -300,7 +300,7 @@ public class Main {
                                 continue;
                             }
                         }
-                        else if (p2.getCurrentMonster().getStatusCondition() == StatusCondition.PARALYZE) {
+                        if (p2.getCurrentMonster().getStatusCondition() == StatusCondition.PARALYZE) {
                             int chanceParalyze2 = random.nextInt(4);
                             if (chanceParalyze2 == 1) {
                                 p2.getCurrentMonster().setIsMoveable(false);
@@ -403,7 +403,7 @@ public class Main {
                                     Move newMove1 = p1.getCurrentMonster().getMoves().get(movePlayer1 - 1);
                                     p1.getCurrentMonster().setCurrentMove(newMove1);
                                     if (p1.getCurrentMonster().getCurrentMove().getAmmunition() <= 0){
-                                        System.out.printf("Amunisi sudah habis!\n");
+                                        System.out.printf("Amunisi habis!\n");
                                     }
                                     else {
                                         outOfAmmunition = true;
@@ -464,7 +464,7 @@ public class Main {
                                     Move newMove1 = p2.getCurrentMonster().getMoves().get(movePlayer1 - 1);
                                     p2.getCurrentMonster().setCurrentMove(newMove1);
                                     if (p2.getCurrentMonster().getCurrentMove().getAmmunition() <= 0){
-                                        System.out.printf("Amunisi sudah habis!\n");
+                                        System.out.printf("Amunisi habis!\n");
                                     }
                                     else {
                                         outOfAmmunition = true;
@@ -1034,12 +1034,17 @@ public class Main {
                                 System.out.printf("%s tidak bisa bergerak\n", p2.getCurrentMonster().getName());
                             }
                         }
+
                         else {
                             System.out.printf("%s mengeluarkan %s!\n", p1.getName(), p1.getCurrentMonster().getName());
                             System.out.printf("%s mengeluarkan %s!\n", p2.getName(), p2.getCurrentMonster().getName());
                         }
                     }
-                    if (countMons1==0) {
+                    if (countMons1 == 0 && countMons2 == 0){
+                        System.out.printf("Pertandingan berakhir dengan seri\n");
+                        game = false;
+                    }
+                    else if (countMons1==0) {
                         System.out.printf("%s adalah juara pertandingan ini!\n", p2.getName());
                         game = false;
                     }
