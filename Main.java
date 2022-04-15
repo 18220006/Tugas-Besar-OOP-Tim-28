@@ -346,9 +346,9 @@ public class Main {
                                 }
                             }
                         }
+
                         int inputP1 = 0;
                         int inputP2 = 0;
-
                         boolean turn1 = true;
 
                         while (turn1){
