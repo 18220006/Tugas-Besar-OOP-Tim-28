@@ -321,14 +321,12 @@ public class Main {
                                     monster1.setSleepTime(monster1.getSleepTime() - 1);
                                     if (monster1.getSleepTime() <= 0) {
                                         if (monster1.getStatusCondition() == StatusCondition.SLEEP) {
-                                            System.out.printf("%s Woke Up\n", monster1.getName());
+                                            System.out.printf("%s terbangun\n", monster1.getName());
                                             monster1.setStatusCondition(StatusCondition.NONE);
-                                        }
-                                        else {
                                         }
                                     }
                                     else{
-                                        System.out.printf("%s Is Still In A Deep Sleep\n", monster1.getName());
+                                        System.out.printf("%s tertidur lelap\n", monster1.getName());
                                     }
                                 }
                             }
@@ -337,15 +335,12 @@ public class Main {
                                     monster2.setSleepTime(monster2.getSleepTime() - 1);
                                     if (monster2.getSleepTime() <= 0) {
                                         if (monster2.getStatusCondition() == StatusCondition.SLEEP) {
-                                            System.out.printf("%s Woke Up\n", monster2.getName());
+                                            System.out.printf("%s terbangun\n", monster2.getName());
                                             monster2.setStatusCondition(StatusCondition.NONE);
-                                        }
-                                        else {
-                                            continue;
                                         }
                                     }
                                     else{
-                                        System.out.printf("%s Still In A Deep Sleep\n", monster2.getName());
+                                        System.out.printf("%s tertidur lelap\n", monster2.getName());
                                     }
                                 }
                             }
@@ -373,20 +368,25 @@ public class Main {
                                 System.out.println(p1.getCurrentMonster().getName() + " [" + p1.getName() + "]");
                                 System.out.println(p2.getCurrentMonster().getName() + " [" + p2.getName() + "]\n");
                             } else if (inputP1 == 2){
-                                boolean isSwitch = true;
-                                while (isSwitch) {
-                                    p2.printMonsters();
-                                    System.out.printf("Pilih monster: ");
-                                    int s = scan.nextInt();
-                                    if(p2.getMonsters().get(s-1).getStats().getHealthPoint() <= 0){
-                                        System.out.printf("Monster sudah mati\n");
+                                if (countMons1 > 1){
+                                    boolean isSwitch = true;
+                                    while (isSwitch) {
+                                        p1.printMonsters();
+                                        System.out.printf("Pilih monster: ");
+                                        int s = scan.nextInt();
+                                        if(p1.getMonsters().get(s-1).getStats().getHealthPoint() <= 0){
+                                            System.out.printf("Monster sudah mati\n");
+                                        }
+                                        else{
+                                            p1.setCurrentMonster(p1.getMonsters().get(s-1));
+                                            isSwitch = false;
+                                        }
                                     }
-                                    else{
-                                        p2.setCurrentMonster(p2.getMonsters().get(s-1));
-                                        isSwitch = false;
-                                    }
+                                    turn1 = false;
                                 }
-                                turn1 = false;
+                                else{
+                                    System.out.println("\nKamu hanya memiliki 1 monster!\n");
+                                }
                             } else {
                                 System.out.println("Moves milik " + p1.getCurrentMonster().getName() + ":\n");
                                 int index1 = 1;
@@ -398,7 +398,7 @@ public class Main {
                                 }
                                 boolean outOfAmmunition = false;
                                 while(!outOfAmmunition) {
-                                    System.out.printf("Select Your Move : ");
+                                    System.out.printf("Pilih move: ");
                                     int movePlayer1 = scan.nextInt();
                                     Move newMove1 = p1.getCurrentMonster().getMoves().get(movePlayer1 - 1);
                                     p1.getCurrentMonster().setCurrentMove(newMove1);
@@ -434,20 +434,25 @@ public class Main {
                                 System.out.println(p1.getCurrentMonster().getName() + " [" + p1.getName() + "]");
                                 System.out.println(p2.getCurrentMonster().getName() + " [" + p2.getName() + "]\n");
                             } else if (inputP2 == 2){
-                                boolean isSwitch = true;
-                                while (isSwitch) {
-                                    p2.printMonsters();
-                                    System.out.printf("Pilih monster: ");
-                                    int s = scan.nextInt();
-                                    if(p2.getMonsters().get(s-1).getStats().getHealthPoint() <= 0){
-                                        System.out.printf("Monster sudah mati\n");
+                                if (countMons2 > 1){
+                                    boolean isSwitch = true;
+                                    while (isSwitch) {
+                                        p2.printMonsters();
+                                        System.out.printf("Pilih monster: ");
+                                        int s = scan.nextInt();
+                                        if(p2.getMonsters().get(s-1).getStats().getHealthPoint() <= 0){
+                                            System.out.printf("Monster sudah mati\n");
+                                        }
+                                        else{
+                                            p2.setCurrentMonster(p2.getMonsters().get(s-1));
+                                            isSwitch = false;
+                                        }
                                     }
-                                    else{
-                                        p2.setCurrentMonster(p2.getMonsters().get(s-1));
-                                        isSwitch = false;
-                                    }
+                                    turn1 = false;
                                 }
-                                turn2 = false;
+                                else{
+                                    System.out.println("\nKamu hanya memiliki 1 monster!\n");
+                                }
                             } else {
                                 System.out.println("Moves milik " + p2.getCurrentMonster().getName() + ":\n");
                                 int index1 = 1;
@@ -459,7 +464,7 @@ public class Main {
                                 }
                                 boolean outOfAmmunition = false;
                                 while(!outOfAmmunition) {
-                                    System.out.printf("Select Your Move : ");
+                                    System.out.printf("Pilih move: ");
                                     int movePlayer1 = scan.nextInt();
                                     Move newMove1 = p2.getCurrentMonster().getMoves().get(movePlayer1 - 1);
                                     p2.getCurrentMonster().setCurrentMove(newMove1);
@@ -477,10 +482,10 @@ public class Main {
                         }
 
                         if ((inputP1 == 1) && (inputP2 == 1)) {
-                            int player1MovePriority = p1.getCurrentMonster().getCurrentMove().getPriority();
-                            int player2MovePriority = p2.getCurrentMonster().getCurrentMove().getPriority();
-                            Double player1Speed = p1.getCurrentMonster().getStats().getSpeed();
-                            Double player2Speed = p2.getCurrentMonster().getStats().getSpeed();
+                            int p1Priority = p1.getCurrentMonster().getCurrentMove().getPriority();
+                            int p2Priority = p2.getCurrentMonster().getCurrentMove().getPriority();
+                            Double p1Speed = p1.getCurrentMonster().getStats().getSpeed();
+                            Double p2Speed = p2.getCurrentMonster().getStats().getSpeed();
                             if (p1.getCurrentMonster().getIsMoveable() == false || p1.getCurrentMonster().getIsMoveable() == false) {
                                 if (p2.getCurrentMonster().getIsMoveable() == true) {
                                     // Player 1 Move
@@ -578,7 +583,7 @@ public class Main {
                             }
                             else {
                                 // Adu Priority
-                                if((player1MovePriority > player2MovePriority) || ((player1MovePriority == player2MovePriority) && (player1Speed > player2Speed))) {
+                                if((p1Priority > p2Priority) || ((p1Priority == p2Priority) && (p1Speed > p2Speed))) {
                                     // Player 1 Move First
                                     System.out.printf("%s's %s Attack %s's %s\n", p1.getName(), p1.getCurrentMonster().getName(),
                                             p2.getName(), p2.getCurrentMonster().getName());
@@ -666,7 +671,7 @@ public class Main {
                                     }
                                 }
 
-                                else if((player1MovePriority < player2MovePriority) || ((player1MovePriority == player2MovePriority) && (player1Speed < player2Speed))) {
+                                else if((p1Priority < p2Priority) || ((p1Priority == p2Priority) && (p1Speed < p2Speed))) {
                                     // Player 2 Move
                                     System.out.printf("%s's %s Attack %s's %s\n", p2.getName(), p2.getCurrentMonster().getName(),
                                             p1.getName(), p1.getCurrentMonster().getName());
@@ -936,7 +941,8 @@ public class Main {
                         }
 
                         else if ((inputP1 == 1) && (inputP2 == 2)) {
-                            if (p1.getCurrentMonster().getIsMoveable() == false) {
+                            System.out.printf("\n%s mengeluarkan %s!\n", p2.getName(), p2.getCurrentMonster().getName());
+                            if (p1.getCurrentMonster().getIsMoveable() == true) {
                                 // Player 1 Move
                                 System.out.printf("%s's %s Attack %s's %s\n", p1.getName(), p1.getCurrentMonster().getName(),
                                         p2.getName(), p2.getCurrentMonster().getName());
@@ -986,7 +992,8 @@ public class Main {
                         }
 
                         else if ((inputP1 == 2) && (inputP2 == 1)) {
-                            if (p2.getCurrentMonster().getIsMoveable() ==  false) {
+                            System.out.printf("\n%s mengeluarkan %s!\n", p1.getName(), p1.getCurrentMonster().getName());
+                            if (p2.getCurrentMonster().getIsMoveable() ==  true) {
                                 // Player 2 Move
                                 System.out.printf("%s's %s Attack %s's %s\n", p2.getName(), p2.getCurrentMonster().getName(),
                                         p1.getName(), p1.getCurrentMonster().getName());
@@ -1036,7 +1043,7 @@ public class Main {
                         }
 
                         else {
-                            System.out.printf("%s mengeluarkan %s!\n", p1.getName(), p1.getCurrentMonster().getName());
+                            System.out.printf("\n%s mengeluarkan %s!\n", p1.getName(), p1.getCurrentMonster().getName());
                             System.out.printf("%s mengeluarkan %s!\n", p2.getName(), p2.getCurrentMonster().getName());
                         }
                     }
